@@ -2,6 +2,27 @@ return {
   -- disable built-in plugin
   { "bufferline.nvim", enabled = false },
   { "nvim-neo-tree/neo-tree.nvim", enabled = false },
+  -- built-in plugins
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    opts = function()
+      local null_ls = require("null-ls")
+
+      return {
+        sources = {
+          null_ls.builtins.formatting.eslint_d.with({
+            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+          }),
+          null_ls.builtins.diagnostics.eslint_d.with({
+            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+          }),
+          null_ls.builtins.code_actions.eslint_d.with({
+            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+          }),
+        },
+      }
+    end,
+  },
   {
     "nvim-telescope/telescope.nvim",
     opts = function(_, opts)
