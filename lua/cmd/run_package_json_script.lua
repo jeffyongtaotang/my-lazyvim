@@ -13,6 +13,11 @@ function M.get_scripts_from_package_json(filter)
   local scripts = {}
 
   local decoded_table = vim.json.decode(file_str)
+
+  if decoded_table == nil then
+    error('decode json error, path:' .. path)
+  end
+
   local scripts_table = decoded_table.scripts or {}
 
   for k in pairs(scripts_table) do

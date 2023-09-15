@@ -6,11 +6,11 @@ return {
   {
     "hrsh7th/nvim-cmp",
     opts = function(_, opts)
-      local cmp = require('cmp')
+      local cmp = require("cmp")
 
       opts.mapping["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert })
       opts.mapping["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
-    end
+    end,
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
@@ -157,39 +157,80 @@ return {
     },
   },
   {
-    {
-      "akinsho/toggleterm.nvim",
-      version = "*",
-      opts = {
-        active = true,
-        on_config_done = nil,
-        size = 20,
-        open_mapping = [[<c-\>]],
-        hide_numbers = true, -- hide the number column in toggleterm buffers
-        shade_filetypes = {},
-        shade_terminals = true,
-        shading_factor = 2,     -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
-        start_in_insert = true,
-        insert_mappings = true, -- whether or not the open mapping applies in insert mode
-        persist_size = false,
-        -- direction = 'vertical' | 'horizontal' | 'window' | 'float',
-        direction = "float",
-        close_on_exit = true, -- close the terminal window when the process exits
-        shell = nil,          -- change the default shell
-        float_opts = {
-          border = "curved",
-          winblend = 0,
-          highlights = {
-            border = "Normal",
-            background = "Normal",
-          },
-        },
-        execs = {
-          { nil, "<M-1>", "Horizontal Terminal", "horizontal", 0.3 },
-          { nil, "<M-2>", "Vertical Terminal",   "vertical",   0.4 },
-          { nil, "<M-3>", "Float Terminal",      "float",      nil },
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    opts = {
+      active = true,
+      on_config_done = nil,
+      size = 20,
+      open_mapping = [[<c-\>]],
+      hide_numbers = true, -- hide the number column in toggleterm buffers
+      shade_filetypes = {},
+      shade_terminals = true,
+      shading_factor = 2,     -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
+      start_in_insert = true,
+      insert_mappings = true, -- whether or not the open mapping applies in insert mode
+      persist_size = false,
+      -- direction = 'vertical' | 'horizontal' | 'window' | 'float',
+      direction = "float",
+      close_on_exit = true, -- close the terminal window when the process exits
+      shell = nil,          -- change the default shell
+      float_opts = {
+        border = "curved",
+        winblend = 0,
+        highlights = {
+          border = "Normal",
+          background = "Normal",
         },
       },
+      execs = {
+        { nil, "<M-1>", "Horizontal Terminal", "horizontal", 0.3 },
+        { nil, "<M-2>", "Vertical Terminal",   "vertical",   0.4 },
+        { nil, "<M-3>", "Float Terminal",      "float",      nil },
+      },
     },
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    -- stylua: ignore
+    keys = {
+      { "<leader>du", function() require("dapui").toggle({}) end, desc = "Dap UI" },
+      { "<leader>de", function() require("dapui").eval() end,     desc = "Eval",  mode = { "n", "v" } },
+    },
+    opts = {
+      elements = {
+        { id = 'console', size = 1 },
+      },
+      size = 0.2,
+      position = "right"
+    },
+    config = true,
+  },
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      {
+        "williamboman/mason.nvim",
+        opts = function(_, opts)
+          opts.ensure_installed = opts.ensure_installed or {}
+          table.insert(opts.ensure_installed, "js-debug-adapter")
+        end,
+      },
+    },
+    opts = function()
+      require("dap").adapters["pwa-node"] = {
+        type = "server",
+        host = "localhost",
+        port = "${port}",
+        executable = {
+          command = "node",
+          args = {
+            require("mason-registry").get_package("js-debug-adapter"):get_install_path()
+            .. "/js-debug/src/dapDebugServer.js",
+            "${port}",
+          },
+        },
+      }
+    end
   },
 }
