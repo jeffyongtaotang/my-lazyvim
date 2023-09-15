@@ -13,7 +13,6 @@ require("lazy").setup({
     { import = "plugins" },
     { import = "plugins.cokeline" },
     { import = "plugins.startup_dashboard" },
-    { import = "plugins.trouble_cfg" },
     { import = "plugins.swagger_preview" },
     { import = "plugins.toggle_term" },
   },
