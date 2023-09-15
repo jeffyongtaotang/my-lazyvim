@@ -4,7 +4,7 @@
 
 -- Enable Treesitter folding
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldexpr   = "nvim_treesitter#foldexpr()"
 vim.opt.foldenable = false
 
 -- always show status line

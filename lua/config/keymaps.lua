@@ -10,6 +10,11 @@ vim.keymap.set("n", "<C-l>", "<Plug>(cokeline-focus-next)")
 vim.keymap.set("n", "<C-h>", "<Plug>(cokeline-focus-prev)")
 vim.keymap.set("n", "<C-c>", ":bdelete<cr>")
 
+-- TODO:
+-- use which-key style to remove the key map
+vim.keymap.del('n', '<leader>gg')
+vim.keymap.del('n', '<leader>gG')
+
 local wk = require("which-key")
 
 wk.register({
