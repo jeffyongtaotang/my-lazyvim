@@ -128,13 +128,21 @@ return {
   },
   { "towolf/vim-helm" },
   {
-    -- Might require some manual step, if ":MarkdownPreview" not working.
-    -- ref: https://github.com/iamcco/markdown-preview.nvim/issues/424
+    -- NOTE:
+    -- from: https://github.com/iamcco/markdown-preview.nvim/issues/595#issuecomment-1630961979
     "iamcco/markdown-preview.nvim",
-    run = "cd app && npm install",
+    build = "cd app && npm install",
     ft = "markdown",
+    lazy = true,
+    keys = { { "gm", "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown Preview" } },
     config = function()
-      vim.g.mkdp_auto_start = 1
+      vim.g.mkdp_auto_close = true
+      vim.g.mkdp_open_to_the_world = false
+      vim.g.mkdp_open_ip = "127.0.0.1"
+      vim.g.mkdp_port = "8765"
+      vim.g.mkdp_browser = ""
+      vim.g.mkdp_echo_preview_url = true
+      vim.g.mkdp_page_title = "${name}"
     end,
   },
   {

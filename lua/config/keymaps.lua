@@ -15,6 +15,7 @@ vim.keymap.set("n", "<C-c>", ":bdelete<cr>")
 vim.keymap.del('n', '<leader>gg')
 vim.keymap.del('n', '<leader>gG')
 
+-- which-keys
 local wk = require("which-key")
 
 wk.register({
@@ -23,5 +24,8 @@ wk.register({
       require("telescope").extensions.project.project({ display_type = "full" })
     end,
     "[p]ick a Prject",
+  },
+  ["cp"] = {
+    "<cmd>lua require'cmd.preview_current_file'.run()<cr>", "file [p]review"
   },
 })
