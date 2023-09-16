@@ -1,14 +1,4 @@
-local function pick_one_sync(items, prompt, label_fn)
-  local choices = { prompt }
-  for i, item in ipairs(items) do
-    table.insert(choices, string.format('%d: %s', i, label_fn(item)))
-  end
-  local choice = vim.fn.inputlist(choices)
-  if choice < 1 or choice > #items then
-    return nil
-  end
-  return items[choice]
-end
+local pick_one_sync = require('cmd.ui').pick_one_sync
 
 for _, language in ipairs({ "typescript", "javascript" }) do
   require("dap").configurations[language] = {
@@ -27,7 +17,7 @@ for _, language in ipairs({ "typescript", "javascript" }) do
           return item
         end)
 
-        print('env is' .. env)
+        print('Picked Test Env\n' .. env)
         return {
           env
         }

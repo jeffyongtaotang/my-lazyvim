@@ -10,15 +10,12 @@ vim.keymap.set("n", "<C-l>", "<Plug>(cokeline-focus-next)")
 vim.keymap.set("n", "<C-h>", "<Plug>(cokeline-focus-prev)")
 vim.keymap.set("n", "<C-c>", ":bdelete<cr>")
 
--- TODO:
--- use which-key style to remove the key map
+-- NOTE:remove the default lazygit binding
 vim.keymap.del('n', '<leader>gg')
 vim.keymap.del('n', '<leader>gG')
 
 -- which-keys
-local wk = require("which-key")
-
-wk.register({
+require("which-key").register({
   ["P"] = {
     function()
       require("telescope").extensions.project.project({ display_type = "full" })
@@ -27,5 +24,8 @@ wk.register({
   },
   ["cp"] = {
     "<cmd>lua require'cmd.preview_current_file'.run()<cr>", "file [p]review"
+  },
+  ["cs"] = {
+    "<cmd>lua require'cmd.run_package_json_script'.select_and_run_script()<cr>", "Run Project Script"
   },
 })

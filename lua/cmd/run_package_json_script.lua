@@ -1,7 +1,9 @@
+local pick_one = require('cmd.ui').pick_one
 local M = {}
 
 function M.get_scripts_from_package_json(filter)
   local path = vim.fn.getcwd() .. "/package.json"
+
   local file_str = require("cmd.io").read_file_as_string(path)
 
   if file_str == nil then
@@ -38,24 +40,20 @@ function M.select_and_run_script()
 
   table.sort(scripts)
 
-  vim.ui.select(
-    scripts,
-    {
-      prompt = 'Select a Script:',
-      format_item = function(item)
-        return item
-      end,
-    },
-    function(choice)
+  local script = pick_one(scripts, 'Select Cmd', function(item)
+    return item
+  end, function(result)
+    print('Picked Script\n' .. result)
+    if result ~= nil then
       vim.cmd({
         cmd = 'term',
         args = {
           'yarn',
-          choice
+          result
         }
       })
     end
-  )
+  end)
 end
 
 return M
