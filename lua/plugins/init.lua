@@ -194,15 +194,62 @@ return {
     "rcarriga/nvim-dap-ui",
     -- stylua: ignore
     keys = {
-      { "<leader>du", function() require("dapui").toggle({}) end, desc = "Dap UI" },
-      { "<leader>de", function() require("dapui").eval() end,     desc = "Eval",  mode = { "n", "v" } },
+      { "<leader>du", function() require("dapui").toggle({ reset = true, layout = 1 }) end, desc = "Dap Console" },
+      {
+        "<leader>dr",
+        function() require("dapui").toggle({ reset = true, layout = 2 }) end,
+        desc = "Dap Repl and Breakpoints"
+      },
+      { "<leader>dS", function() require("dapui").toggle({ reset = true, layout = 3 }) end, desc = "Dap Scope and Others" },
     },
     opts = {
-      elements = {
-        { id = 'console', size = 1 },
+      layouts = {
+        -- NOTE: Single console column on the right
+        {
+          elements = {
+            {
+              id = 'console',
+              size = 1
+            }
+          },
+          position = 'right',
+          size = 50
+        },
+        -- NOTE: Bottom control area
+        {
+          elements = {
+            {
+              id = 'breakpoints',
+              size = 0.2
+            },
+            {
+              id = 'repl',
+              size = 0.8
+            }
+          },
+          position = 'bottom',
+          size = 20
+        },
+        -- NOTE: Other pane on the left
+        {
+          elements = {
+            {
+              id = 'scopes',
+              size = 0.4
+            },
+            {
+              id = 'stacks',
+              size = 0.4
+            },
+            {
+              id = 'watchers',
+              size = 0.2
+            },
+          },
+          position = 'left',
+          size = 40
+        },
       },
-      size = 0.2,
-      position = "right"
     },
     config = true,
   },
