@@ -5,7 +5,7 @@ return {
   -- built-in plugins
   {
     "hrsh7th/nvim-cmp",
-    opts = function(_, opts)
+    uopts = function(_, opts)
       local cmp = require("cmp")
 
       opts.mapping["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert })
@@ -27,6 +27,16 @@ return {
           }),
           null_ls.builtins.code_actions.eslint_d.with({
             filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+          }),
+          null_ls.builtins.diagnostics.cspell.with({
+            filetypes = { "markdown", "txt" },
+            -- Force the severity to be HINT
+            diagnostics_postprocess = function(diagnostic)
+              diagnostic.severity = vim.diagnostic.severity.HINT
+            end,
+          }),
+          null_ls.builtins.code_actions.cspell.with({
+            filetypes = { "markdown", "txt" },
           }),
         },
       }
@@ -278,6 +288,38 @@ return {
           },
         },
       }
+    end
+  },
+  {
+    "rest-nvim/rest.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("rest-nvim").setup({
+        result_split_horizontal = false,
+        result_split_in_place = false,
+        skip_ssl_verification = true,
+        encode_url = true,
+        highlight = {
+          enabled = true,
+          timeout = 150,
+        },
+        result = {
+          show_url = true,
+          show_curl_command = true,
+          show_http_info = true,
+          show_headers = true,
+          formatters = {
+            json = "jq",
+            html = function(body)
+              return vim.fn.system({ "tidy", "-i", "-q", "-" }, body)
+            end
+          },
+        },
+        jump_to_request = false,
+        env_file = '.env',
+        custom_dynamic_variables = {},
+        yank_dry_run = true,
+      })
     end
   },
 }

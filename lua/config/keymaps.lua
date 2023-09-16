@@ -16,16 +16,28 @@ vim.keymap.del('n', '<leader>gG')
 
 -- which-keys
 require("which-key").register({
-  ["P"] = {
+  ["<leader>P"] = {
     function()
       require("telescope").extensions.project.project({ display_type = "full" })
     end,
     "[p]ick a Prject",
   },
-  ["cp"] = {
+  ["<leader>cp"] = {
     "<cmd>lua require'cmd.preview_current_file'.run()<cr>", "file [p]review"
   },
-  ["cs"] = {
+  ["<leader>cs"] = {
     "<cmd>lua require'cmd.run_package_json_script'.select_and_run_script()<cr>", "Run Project Script"
   },
+  ["<leader>r"] = {
+    name = "Rest API Request",
+    ["r"] = {
+      "<Plug>RestNvim<cr>", "Run Request under the cursor"
+    },
+    ["p"] = {
+      "<Plug>RestNvimPreview<cr>", "Preview cURL command"
+    },
+    ["R"] = {
+      "<Plug>RestNvimLast<cr>", "Re-run last Request"
+    }
+  }
 })
