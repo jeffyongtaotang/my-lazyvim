@@ -10,8 +10,8 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 require("lazy").setup({
   spec = {
     { "LazyVim/LazyVim",                         import = "lazyvim.plugins", opts = { colorscheme = "sherbet" } },
-    { import = "lazyvim.plugins.extras.dap.core" },
     { import = "plugins" },
+    { import = "lazyvim.plugins.extras.dap.core" },
     { import = "plugins.cokeline" },
     { import = "plugins.startup_dashboard" },
     { import = "plugins.swagger_preview" },
@@ -47,4 +47,3 @@ require("lazy").setup({
 
 require('lsp.tilt_ls')
 require('cmd.select_test_env_from_package_json')
---require("plugins.rust_tools")

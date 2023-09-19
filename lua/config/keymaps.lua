@@ -28,6 +28,29 @@ require("which-key").register({
   ["<leader>cs"] = {
     "<cmd>lua require'cmd.run_package_json_script'.select_and_run_script()<cr>", "Run Project Script"
   },
+  ["<leader>cr"] = {
+    name = "rust tools",
+    r = {
+      "<cmd>lua require'rust-tools.runnables'.runnables()<cr>",
+      "runnables"
+    },
+    h = {
+      "<cmd>lua require'rust-tools.hover_actions'.hover_actions()<cr>",
+      "hover actions"
+    },
+    m = {
+      "<cmd>lua require'rust-tools.expand_macro'.expand_macro()<cr>",
+      "expand macro"
+    },
+    a = {
+      "<cmd>lua require'rust-tools.code_action_group'.code_action_group()<cr>",
+      "code action group"
+    },
+    g = {
+      "<cmd>lua require'rust-tools.crate_graph'.view_crate_graph('png', 'crate_graph.png')<cr>",
+      "crate graph"
+    },
+  },
   ["<leader>r"] = {
     name = "Rest API Request",
     ["r"] = {

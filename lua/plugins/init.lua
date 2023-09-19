@@ -5,7 +5,7 @@ return {
   -- built-in plugins
   {
     "hrsh7th/nvim-cmp",
-    uopts = function(_, opts)
+    opts = function(_, opts)
       local cmp = require("cmp")
 
       opts.mapping["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert })
@@ -104,7 +104,7 @@ return {
           group_empty = true,
         },
         filters = {
-          dotfiles = false,
+          git_ignored = false,
         },
       })
     end,
@@ -321,5 +321,15 @@ return {
         yank_dry_run = true,
       })
     end
+  },
+  {
+    'simrat39/rust-tools.nvim',
+    opts = {
+      tools = {
+        hover_actions = {
+          auto_focus = true,
+        }
+      },
+    }
   },
 }
