@@ -202,16 +202,22 @@ return {
   },
   {
     "rcarriga/nvim-dap-ui",
-    -- stylua: ignore
-    keys = {
-      { "<leader>du", function() require("dapui").toggle({ reset = true, layout = 1 }) end, desc = "Dap Console" },
-      {
-        "<leader>dr",
-        function() require("dapui").toggle({ reset = true, layout = 2 }) end,
-        desc = "Dap Repl and Breakpoints"
-      },
-      { "<leader>dS", function() require("dapui").toggle({ reset = true, layout = 3 }) end, desc = "Dap Scope and Others" },
-    },
+    keys = function()
+      return {
+        { "<leader>du", function() require("dapui").toggle({ reset = true, layout = 1 }) end, desc = "Dap Console" },
+        {
+          "<leader>dr",
+          function() require("dapui").toggle({ reset = true, layout = 2 }) end,
+          desc = "Dap Repl and Breakpoints"
+        },
+        {
+          "<leader>dS",
+          function() require("dapui").toggle({ reset = true, layout = 3 }) end,
+          desc =
+          "Dap Scope and Others"
+        },
+      }
+    end,
     opts = {
       layouts = {
         -- NOTE: Single console column on the right
@@ -261,7 +267,14 @@ return {
         },
       },
     },
-    config = true,
+    config = function(_, opts)
+      local dap = require("dap")
+      local dapui = require("dapui")
+      dapui.setup(opts)
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open({ reset = true, layout = 1 })
+      end
+    end,
   },
   {
     "mfussenegger/nvim-dap",
@@ -305,7 +318,7 @@ return {
         },
         result = {
           show_url = true,
-          show_curl_command = true,
+          show_curl_command = false,
           show_http_info = true,
           show_headers = true,
           formatters = {

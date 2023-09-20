@@ -9,9 +9,10 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
   spec = {
-    { "LazyVim/LazyVim",                         import = "lazyvim.plugins", opts = { colorscheme = "sherbet" } },
-    { import = "plugins" },
+    { "LazyVim/LazyVim",                                  import = "lazyvim.plugins", opts = { colorscheme = "sherbet" } },
+    { import = "lazyvim.plugins.extras.editor.mini-files" },
     { import = "lazyvim.plugins.extras.dap.core" },
+    { import = "plugins" },
     { import = "plugins.cokeline" },
     { import = "plugins.startup_dashboard" },
     { import = "plugins.swagger_preview" },
