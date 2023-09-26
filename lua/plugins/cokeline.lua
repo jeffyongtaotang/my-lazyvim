@@ -1,4 +1,4 @@
-local get_hex = require("cokeline/utils").get_hex
+local get_hex = require('cokeline.hlgroups').get_hl_attr
 local yellow = vim.g.terminal_color_3
 
 require("cokeline").setup({
