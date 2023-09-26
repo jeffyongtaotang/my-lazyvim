@@ -99,6 +99,13 @@ return {
         sort_by = "case_sensitive",
         view = {
           width = 30,
+          float = {
+            enable = true,
+            open_win_config = {
+              width = 100,
+              height = 100,
+            }
+          }
         },
         renderer = {
           group_empty = true,

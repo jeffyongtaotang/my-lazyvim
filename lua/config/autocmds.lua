@@ -7,3 +7,9 @@ vim.api.nvim_create_autocmd({ 'BufRead' }, {
   pattern = { 'Tiltfile' },
   command = 'setf tiltfile'
 })
+
+-- helm-ls required
+vim.api.nvim_create_autocmd({ 'BufRead' }, {
+  pattern = { '*/templates/*.yaml', '*/templates/*.tpl' },
+  command = 'setf helm'
+})
