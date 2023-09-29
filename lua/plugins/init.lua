@@ -104,8 +104,8 @@ return {
             open_win_config = {
               width = 100,
               height = 100,
-            }
-          }
+            },
+          },
         },
         renderer = {
           group_empty = true,
@@ -211,17 +211,36 @@ return {
     "rcarriga/nvim-dap-ui",
     keys = function()
       return {
-        { "<leader>du", function() require("dapui").toggle({ reset = true, layout = 1 }) end, desc = "Dap Console" },
         {
-          "<leader>dr",
-          function() require("dapui").toggle({ reset = true, layout = 2 }) end,
-          desc = "Dap Repl and Breakpoints"
+          "<leader>du",
+          function()
+            require("dapui").toggle({ reset = true })
+          end,
+          desc = "Dap Console",
         },
         {
-          "<leader>dS",
-          function() require("dapui").toggle({ reset = true, layout = 3 }) end,
-          desc =
-          "Dap Scope and Others"
+          "<leader>dr",
+          function()
+            local dap_ui = require("dapui")
+            dap_ui.float_element("repl", {
+              width = 40,
+              height = 20,
+              enter = true,
+            })
+          end,
+          desc = "Dap Repl",
+        },
+        {
+          "<leader>ds",
+          function()
+            local dap_ui = require("dapui")
+            dap_ui.float_element("scopes", {
+              width = 80,
+              height = 100,
+              enter = true,
+            })
+          end,
+          desc = "Dap Scope",
         },
       }
     end,
@@ -231,46 +250,16 @@ return {
         {
           elements = {
             {
-              id = 'console',
-              size = 1
-            }
-          },
-          position = 'right',
-          size = 50
-        },
-        -- NOTE: Bottom control area
-        {
-          elements = {
-            {
-              id = 'breakpoints',
-              size = 0.2
+              id = "console",
+              size = 0.9,
             },
             {
-              id = 'repl',
-              size = 0.8
-            }
-          },
-          position = 'bottom',
-          size = 20
-        },
-        -- NOTE: Other pane on the left
-        {
-          elements = {
-            {
-              id = 'scopes',
-              size = 0.4
-            },
-            {
-              id = 'stacks',
-              size = 0.4
-            },
-            {
-              id = 'watchers',
-              size = 0.2
+              id = "breakpoints",
+              size = 0.1,
             },
           },
-          position = 'left',
-          size = 40
+          position = "right",
+          size = 80,
         },
       },
     },
@@ -279,7 +268,7 @@ return {
       local dapui = require("dapui")
       dapui.setup(opts)
       dap.listeners.after.event_initialized["dapui_config"] = function()
-        dapui.open({ reset = true, layout = 1 })
+        dapui.open({ reset = true })
       end
     end,
   },
@@ -308,7 +297,7 @@ return {
           },
         },
       }
-    end
+    end,
   },
   {
     "rest-nvim/rest.nvim",
@@ -332,24 +321,24 @@ return {
             json = "jq",
             html = function(body)
               return vim.fn.system({ "tidy", "-i", "-q", "-" }, body)
-            end
+            end,
           },
         },
         jump_to_request = false,
-        env_file = '.env',
+        env_file = ".env",
         custom_dynamic_variables = {},
         yank_dry_run = true,
       })
-    end
+    end,
   },
   {
-    'simrat39/rust-tools.nvim',
+    "simrat39/rust-tools.nvim",
     opts = {
       tools = {
         hover_actions = {
           auto_focus = true,
-        }
+        },
       },
-    }
+    },
   },
 }
