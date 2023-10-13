@@ -13,7 +13,7 @@ return {
     end,
   },
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     opts = function()
       local null_ls = require("null-ls")
 
@@ -242,6 +242,18 @@ return {
           end,
           desc = "Dap Scope",
         },
+        {
+          "<leader>dS",
+          function()
+            local dap_ui = require("dapui")
+            dap_ui.float_element("stacks", {
+              width = 80,
+              height = 100,
+              enter = true,
+            })
+          end,
+          desc = "Dap Scope",
+        },
       }
     end,
     opts = {
@@ -314,7 +326,7 @@ return {
         },
         result = {
           show_url = true,
-          show_curl_command = false,
+          show_curl_command = true,
           show_http_info = true,
           show_headers = true,
           formatters = {
