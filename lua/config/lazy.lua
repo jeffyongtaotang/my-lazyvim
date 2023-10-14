@@ -49,5 +49,5 @@ require("lazy").setup({
 require('lsp.yaml_ls')
 require('lsp.tilt_ls')
 require('lsp.helm_ls')
-require('cmd.select_test_env_from_package_json')
+require('lsp.node.debugger_jest')
 require('lsp.rust.debugger_codelldb')
