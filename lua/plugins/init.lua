@@ -295,16 +295,18 @@ return {
     config = function(_, opts)
       local dap = require("dap")
       local dapui = require("dapui")
-      dapui.setup(opts)
-      dap.listeners.after.event_initialized["dapui_config"] = function()
-        local dap_ui = require("dapui")
-        dap_ui.float_element("console", {
+      local open_console = function()
+        dapui.float_element("console", {
           width = 80,
           height = 100,
           enter = true,
           position = "center"
         })
       end
+
+      dapui.setup(opts)
+      dap.listeners.after.event_initialized["dapui_config"] = open_console
+      dap.listeners.after.event_exited["finish"] = open_console
     end,
   },
   {
@@ -314,7 +316,9 @@ return {
         "williamboman/mason.nvim",
         opts = function(_, opts)
           opts.ensure_installed = opts.ensure_installed or {}
+
           table.insert(opts.ensure_installed, "js-debug-adapter")
+          table.insert(opts.ensure_installed, "codelldb")
         end,
       },
     },
@@ -330,6 +334,21 @@ return {
             .. "/js-debug/src/dapDebugServer.js",
             "${port}",
           },
+        },
+      }
+
+      local mason_registry = require("mason-registry")
+      local codelldb_root = mason_registry.get_package("codelldb"):get_install_path() .. "/extension/"
+      local codelldb_path = codelldb_root .. "adapter/codelldb"
+      local liblldb_path = codelldb_root .. "lldb/lib/liblldb.so"
+
+      require("dap").adapters["rust"] = {
+        type = "server",
+        host = "127.0.0.1",
+        port = 13000,
+        executable = {
+          command = codelldb_path,
+          args = { "--liblldb", liblldb_path, "--port", 13000 },
         },
       }
     end,
