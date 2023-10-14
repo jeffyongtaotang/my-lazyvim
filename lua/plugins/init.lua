@@ -345,10 +345,10 @@ return {
       require("dap").adapters["rust"] = {
         type = "server",
         host = "127.0.0.1",
-        port = 13000,
+        port = "${port}",
         executable = {
           command = codelldb_path,
-          args = { "--liblldb", liblldb_path, "--port", 13000 },
+          args = { "--liblldb", liblldb_path, "--port", "${port}" },
         },
       }
     end,
