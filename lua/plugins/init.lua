@@ -214,7 +214,12 @@ return {
         {
           "<leader>du",
           function()
-            require("dapui").toggle({ reset = true })
+            local dap_ui = require("dapui")
+            dap_ui.float_element("console", {
+              width = 80,
+              height = 100,
+              enter = true,
+            })
           end,
           desc = "Dap Console",
         },
@@ -254,6 +259,18 @@ return {
           end,
           desc = "Dap Scope",
         },
+        {
+          "<leader>dB",
+          function()
+            local dap_ui = require("dapui")
+            dap_ui.float_element("breakpoints", {
+              width = 80,
+              height = 100,
+              enter = true,
+            })
+          end,
+          desc = "Dap Scope",
+        },
       }
     end,
     opts = {
@@ -280,7 +297,13 @@ return {
       local dapui = require("dapui")
       dapui.setup(opts)
       dap.listeners.after.event_initialized["dapui_config"] = function()
-        dapui.open({ reset = true })
+        local dap_ui = require("dapui")
+        dap_ui.float_element("console", {
+          width = 80,
+          height = 100,
+          enter = true,
+          position = "center"
+        })
       end
     end,
   },
