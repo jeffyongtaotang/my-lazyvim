@@ -121,6 +121,7 @@ return {
   {
     "lewpoly/sherbet.nvim",
   },
+  { "bluz71/vim-nightfly-colors", name = "nightfly", lazy = false, priority = 1000 },
   {
     "nvim-telescope/telescope-project.nvim",
     event = "BufWinEnter",
