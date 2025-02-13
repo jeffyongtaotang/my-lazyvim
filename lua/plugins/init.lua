@@ -1,6 +1,6 @@
 return {
   -- disable built-in plugin
-  { "bufferline.nvim",             enabled = false },
+  { "bufferline.nvim", enabled = false },
   { "nvim-neo-tree/neo-tree.nvim", enabled = false },
   -- built-in plugins
   {
@@ -146,24 +146,6 @@ return {
   },
   { "towolf/vim-helm" },
   {
-    -- NOTE:
-    -- from: https://github.com/iamcco/markdown-preview.nvim/issues/595#issuecomment-1630961979
-    "iamcco/markdown-preview.nvim",
-    build = "cd app && npm install",
-    ft = "markdown",
-    lazy = true,
-    keys = { { "gm", "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown Preview" } },
-    config = function()
-      vim.g.mkdp_auto_close = true
-      vim.g.mkdp_open_to_the_world = false
-      vim.g.mkdp_open_ip = "127.0.0.1"
-      vim.g.mkdp_port = "8765"
-      vim.g.mkdp_browser = ""
-      vim.g.mkdp_echo_preview_url = true
-      vim.g.mkdp_page_title = "${name}"
-    end,
-  },
-  {
     "vinnymeller/swagger-preview.nvim",
     run = "npm install -g swagger-ui-watcher",
   },
@@ -185,14 +167,14 @@ return {
       hide_numbers = true, -- hide the number column in toggleterm buffers
       shade_filetypes = {},
       shade_terminals = true,
-      shading_factor = 2,     -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
+      shading_factor = 2, -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
       start_in_insert = true,
       insert_mappings = true, -- whether or not the open mapping applies in insert mode
       persist_size = false,
       -- direction = 'vertical' | 'horizontal' | 'window' | 'float',
       direction = "float",
       close_on_exit = true, -- close the terminal window when the process exits
-      shell = nil,          -- change the default shell
+      shell = nil, -- change the default shell
       float_opts = {
         border = "curved",
         winblend = 0,
@@ -203,8 +185,8 @@ return {
       },
       execs = {
         { nil, "<M-1>", "Horizontal Terminal", "horizontal", 0.3 },
-        { nil, "<M-2>", "Vertical Terminal",   "vertical",   0.4 },
-        { nil, "<M-3>", "Float Terminal",      "float",      nil },
+        { nil, "<M-2>", "Vertical Terminal", "vertical", 0.4 },
+        { nil, "<M-3>", "Float Terminal", "float", nil },
       },
     },
   },
@@ -301,7 +283,7 @@ return {
           width = 80,
           height = 100,
           enter = true,
-          position = "center"
+          position = "center",
         })
       end
 
@@ -332,7 +314,7 @@ return {
           command = "node",
           args = {
             require("mason-registry").get_package("js-debug-adapter"):get_install_path()
-            .. "/js-debug/src/dapDebugServer.js",
+              .. "/js-debug/src/dapDebugServer.js",
             "${port}",
           },
         },
