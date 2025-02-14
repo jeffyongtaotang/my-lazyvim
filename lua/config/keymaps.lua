@@ -11,58 +11,58 @@ vim.keymap.set("n", "<C-h>", "<Plug>(cokeline-focus-prev)")
 vim.keymap.set("n", "<C-c>", ":bdelete<cr>")
 
 -- NOTE:remove the default lazygit binding
-vim.keymap.del('n', '<leader>gg')
-vim.keymap.del('n', '<leader>gG')
+vim.keymap.del("n", "<leader>gg")
+vim.keymap.del("n", "<leader>gG")
 -- NOTE:remove the default lazy binding
-vim.keymap.del('n', '<leader>l')
+vim.keymap.del("n", "<leader>l")
 
 -- which-keys
-require("which-key").register({
-  ["<leader>P"] = {
+require("which-key").add({
+  { "<leader>gl", "<cmd>lua Lazygit_toggle()<CR>", desc = "Toggle Lazy Git", mode = "n" },
+  {
+    "<leader>P",
     function()
       require("telescope").extensions.project.project({ display_type = "full" })
     end,
-    "[p]ick a Prject",
+    desc = "[p]ick a Prject",
   },
-  ["<leader>cp"] = {
-    "<cmd>lua require'cmd.preview_current_file'.run()<cr>", "file [p]review"
+  { "<leader>cp", "<cmd>lua require'cmd.preview_current_file'.run()<cr>", desc = "file [p]review" },
+  {
+    "<leader>cs",
+    "<cmd>lua require'cmd.run_package_json_script'.select_and_run_script()<cr>",
+    desc = "Run Project Script",
   },
-  ["<leader>cs"] = {
-    "<cmd>lua require'cmd.run_package_json_script'.select_and_run_script()<cr>", "Run Project Script"
-  },
-  ["<leader>cr"] = {
-    name = "rust tools",
-    r = {
-      "<cmd>lua require'rust-tools.runnables'.runnables()<cr>",
-      "runnables"
-    },
-    h = {
-      "<cmd>lua require'rust-tools.hover_actions'.hover_actions()<cr>",
-      "hover actions"
-    },
-    m = {
-      "<cmd>lua require'rust-tools.expand_macro'.expand_macro()<cr>",
-      "expand macro"
-    },
-    a = {
-      "<cmd>lua require'rust-tools.code_action_group'.code_action_group()<cr>",
-      "code action group"
-    },
-    g = {
-      "<cmd>lua require'rust-tools.crate_graph'.view_crate_graph('png', 'crate_graph.png')<cr>",
-      "crate graph"
-    },
-  },
-  ["<leader>r"] = {
-    name = "Rest API Request",
-    ["r"] = {
-      "<Plug>RestNvim<cr>", "Run Request under the cursor"
-    },
-    ["p"] = {
-      "<Plug>RestNvimPreview<cr>", "Preview cURL command"
-    },
-    ["R"] = {
-      "<Plug>RestNvimLast<cr>", "Re-run last Request"
-    }
-  }
+  -- @TODO:
+  -- {
+  --   "<leader>cr",
+  --   name = "rust tools",
+  --   r = {
+  --     "<cmd>lua require'rust-tools.runnables'.runnables()<cr>",
+  --     "runnables",
+  --   },
+  --   h = {
+  --     "<cmd>lua require'rust-tools.hover_actions'.hover_actions()<cr>",
+  --     "hover actions",
+  --   },
+  --   m = {
+  --     "<cmd>lua require'rust-tools.expand_macro'.expand_macro()<cr>",
+  --     "expand macro",
+  --   },
+  --   a = {
+  --     "<cmd>lua require'rust-tools.code_action_group'.code_action_group()<cr>",
+  --     "code action group",
+  --   },
+  --   g = {
+  --     "<cmd>lua require'rust-tools.crate_graph'.view_crate_graph('png', 'crate_graph.png')<cr>",
+  --     "crate graph",
+  --   },
+  -- },
+  { "<leader>rr", "<cmd>Rest run<cr>", desc = "Open Rest Request UI" },
+  -- {
+  --   "<leader>r",
+  --   name = "Rest API Request",
+  --   { "r", "<Plug>RestNvim<cr>", desc = "Run Request under the cursor" },
+  --   { "p", "<Plug>RestNvimPreview<cr>", desc = "Preview cURL command" },
+  --   { "R", "<Plug>RestNvimLast<cr>", desc = "Re-run last Request" },
+  -- },
 })

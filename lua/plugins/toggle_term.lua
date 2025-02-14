@@ -1,10 +1,10 @@
-local Terminal = require('toggleterm.terminal').Terminal
+local Terminal = require("toggleterm.terminal").Terminal
 
 function Lazygit_toggle()
   local lazygit = Terminal:new({
     cmd = "/opt/homebrew/Cellar/lazygit/0.40.2/bin/lazygit",
 
-    dir = 'git_dir',
+    dir = "git_dir",
     direction = "float",
     float_opts = {
       border = "single",
@@ -22,7 +22,5 @@ function Lazygit_toggle()
 
   lazygit:toggle()
 end
-
-vim.api.nvim_set_keymap("n", "<leader>gl", "<cmd>lua Lazygit_toggle()<CR>", { noremap = true, silent = true })
 
 return {}

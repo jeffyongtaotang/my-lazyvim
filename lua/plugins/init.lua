@@ -13,36 +13,6 @@ return {
     end,
   },
   {
-    "nvimtools/none-ls.nvim",
-    opts = function()
-      local null_ls = require("null-ls")
-
-      return {
-        sources = {
-          null_ls.builtins.formatting.eslint_d.with({
-            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
-          }),
-          null_ls.builtins.diagnostics.eslint_d.with({
-            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
-          }),
-          null_ls.builtins.code_actions.eslint_d.with({
-            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
-          }),
-          null_ls.builtins.diagnostics.cspell.with({
-            filetypes = { "markdown", "txt" },
-            -- Force the severity to be HINT
-            diagnostics_postprocess = function(diagnostic)
-              diagnostic.severity = vim.diagnostic.severity.HINT
-            end,
-          }),
-          null_ls.builtins.code_actions.cspell.with({
-            filetypes = { "markdown", "txt" },
-          }),
-        },
-      }
-    end,
-  },
-  {
     "nvim-telescope/telescope.nvim",
     opts = function(_, opts)
       local actions = require("telescope.actions")
@@ -338,35 +308,13 @@ return {
   },
   {
     "rest-nvim/rest.nvim",
-    requires = { "nvim-lua/plenary.nvim" },
-    config = function()
-      require("rest-nvim").setup({
-        result_split_horizontal = false,
-        result_split_in_place = false,
-        skip_ssl_verification = true,
-        encode_url = true,
-        highlight = {
-          enabled = true,
-          timeout = 150,
-        },
-        result = {
-          show_url = true,
-          show_curl_command = true,
-          show_http_info = true,
-          show_headers = true,
-          formatters = {
-            json = "jq",
-            html = function(body)
-              return vim.fn.system({ "tidy", "-i", "-q", "-" }, body)
-            end,
-          },
-        },
-        jump_to_request = false,
-        env_file = ".env",
-        custom_dynamic_variables = {},
-        yank_dry_run = true,
-      })
-    end,
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      opts = function(_, opts)
+        opts.ensure_installed = opts.ensure_installed or {}
+        table.insert(opts.ensure_installed, "http")
+      end,
+    },
   },
   {
     "simrat39/rust-tools.nvim",
@@ -377,5 +325,8 @@ return {
         },
       },
     },
+  },
+  {
+    "augmentcode/augment.vim",
   },
 }

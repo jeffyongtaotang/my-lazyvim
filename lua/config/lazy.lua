@@ -7,9 +7,16 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
+-- config augment code work space
+vim.g.augment_workspace_folders = { "~/Coding/" }
+
 require("lazy").setup({
   spec = {
-    { "LazyVim/LazyVim",                                  import = "lazyvim.plugins", opts = { colorscheme = "nightfly" } },
+    {
+      "LazyVim/LazyVim",
+      import = "lazyvim.plugins",
+      opts = { colorscheme = "nightfly" },
+    },
     { import = "lazyvim.plugins.extras.editor.mini-files" },
     { import = "lazyvim.plugins.extras.dap.core" },
     { import = "plugins" },
@@ -46,8 +53,8 @@ require("lazy").setup({
   },
 })
 
-require('lsp.yaml_ls')
-require('lsp.tilt_ls')
-require('lsp.helm_ls')
-require('lsp.node.debugger_jest')
-require('lsp.rust.debugger_codelldb')
+require("lsp.yaml_ls")
+require("lsp.tilt_ls")
+require("lsp.helm_ls")
+require("lsp.node.debugger_jest")
+require("lsp.rust.debugger_codelldb")
