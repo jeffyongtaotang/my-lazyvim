@@ -169,6 +169,8 @@ return {
           function()
             local dap_ui = require("dapui")
             dap_ui.float_element("console", {
+              title = "Console",
+              position = "center",
               width = 80,
               height = 100,
               enter = true,
@@ -181,6 +183,8 @@ return {
           function()
             local dap_ui = require("dapui")
             dap_ui.float_element("repl", {
+              title = "Repl",
+              position = "center",
               width = 40,
               height = 20,
               enter = true,
@@ -193,6 +197,8 @@ return {
           function()
             local dap_ui = require("dapui")
             dap_ui.float_element("scopes", {
+              title = "Scopes",
+              position = "center",
               width = 80,
               height = 100,
               enter = true,
@@ -205,6 +211,8 @@ return {
           function()
             local dap_ui = require("dapui")
             dap_ui.float_element("stacks", {
+              title = "Stacks",
+              position = "center",
               width = 80,
               height = 100,
               enter = true,
@@ -217,6 +225,8 @@ return {
           function()
             local dap_ui = require("dapui")
             dap_ui.float_element("breakpoints", {
+              title = "Breakpoints",
+              position = "center",
               width = 80,
               height = 100,
               enter = true,
@@ -250,6 +260,7 @@ return {
       local dapui = require("dapui")
       local open_console = function()
         dapui.float_element("console", {
+          title = "Console",
           width = 80,
           height = 100,
           enter = true,
@@ -307,15 +318,40 @@ return {
     end,
   },
   {
-    "rest-nvim/rest.nvim",
+    "nvimtools/none-ls.nvim",
     dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      opts = function(_, opts)
-        opts.ensure_installed = opts.ensure_installed or {}
-        table.insert(opts.ensure_installed, "http")
-      end,
+      "nvimtools/none-ls-extras.nvim",
     },
+    config = function()
+      local null_ls = require("null-ls")
+
+      null_ls.setup({
+        sources = {
+
+          require("none-ls.formatting.eslint_d").with({
+            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+          }),
+          require("none-ls.diagnostics.eslint_d").with({
+            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+          }),
+          require("none-ls.code_actions.eslint").with({
+            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+          }),
+        },
+      })
+    end,
   },
+  -- V3.x.x
+  -- {
+  --   "rest-nvim/rest.nvim",
+  --   dependencies = {
+  --     "nvim-treesitter/nvim-treesitter",
+  --     opts = function(_, opts)
+  --       opts.ensure_installed = opts.ensure_installed or {}
+  --       table.insert(opts.ensure_installed, "http")
+  --     end,
+  --   },
+  -- },
   {
     "simrat39/rust-tools.nvim",
     opts = {
