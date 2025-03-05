@@ -58,11 +58,4 @@ require("which-key").add({
   --   },
   -- },
   { "<leader>rr", "<cmd>Rest run<cr>", desc = "Open Rest Request UI" },
-  -- {
-  --   "<leader>r",
-  --   name = "Rest API Request",
-  --   { "r", "<Plug>RestNvim<cr>", desc = "Run Request under the cursor" },
-  --   { "p", "<Plug>RestNvimPreview<cr>", desc = "Preview cURL command" },
-  --   { "R", "<Plug>RestNvimLast<cr>", desc = "Re-run last Request" },
-  -- },
 })

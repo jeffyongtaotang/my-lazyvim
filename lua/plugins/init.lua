@@ -237,11 +237,11 @@ return {
           elements = {
             {
               id = "console",
-              size = 0.9,
+              size = 0.65,
             },
             {
-              id = "breakpoints",
-              size = 0.1,
+              id = "repl",
+              size = 0.35,
             },
           },
           position = "right",
@@ -330,17 +330,25 @@ return {
       })
     end,
   },
-  -- V3.x.x
-  -- {
-  --   "rest-nvim/rest.nvim",
-  --   dependencies = {
-  --     "nvim-treesitter/nvim-treesitter",
-  --     opts = function(_, opts)
-  --       opts.ensure_installed = opts.ensure_installed or {}
-  --       table.insert(opts.ensure_installed, "http")
-  --     end,
-  --   },
-  -- },
+  {
+    "rest-nvim/rest.nvim",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      opts = function(_, opts)
+        opts.ensure_installed = opts.ensure_installed or {}
+        table.insert(opts.ensure_installed, "http")
+      end,
+    },
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPrevkew", "MarkdownPreviewStop" },
+    build = "cd app && yarn install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
+  },
   {
     "simrat39/rust-tools.nvim",
     opts = {
