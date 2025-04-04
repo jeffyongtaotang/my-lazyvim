@@ -359,7 +359,4 @@ return {
       },
     },
   },
-  {
-    "augmentcode/augment.vim",
-  },
 }
