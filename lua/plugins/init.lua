@@ -263,10 +263,14 @@ return {
     end,
   },
   {
+    "mason-org/mason.nvim",
+    opts = {},
+  },
+  {
     "mfussenegger/nvim-dap",
     dependencies = {
       {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         opts = function(_, opts)
           opts.ensure_installed = opts.ensure_installed or {}
 
