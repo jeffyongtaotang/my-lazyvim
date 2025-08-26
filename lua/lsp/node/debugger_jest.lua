@@ -1,4 +1,5 @@
-local pick_one_sync = require('cmd.ui').pick_one_sync
+local pick_one_sync = require("cmd.ui").pick_one_sync
+local home_directory = os.getenv("HOME")
 
 for _, language in ipairs({ "typescript", "javascript" }) do
   require("dap").configurations[language] = {
@@ -13,13 +14,13 @@ for _, language in ipairs({ "typescript", "javascript" }) do
 
         table.sort(test_cmds or {})
 
-        local env = pick_one_sync(test_cmds, 'Select Test Cmd', function(item)
+        local env = pick_one_sync(test_cmds, "Select Test Cmd", function(item)
           return item
         end)
 
-        print('Picked Test Env\n' .. env)
+        print("Picked Test Env\n" .. env)
         return {
-          env
+          env,
         }
       end,
       rootPath = "${workspaceFolder}",
@@ -27,6 +28,12 @@ for _, language in ipairs({ "typescript", "javascript" }) do
       console = "integratedTerminal",
       program = "${file}",
       internalConsoleOptions = "neverOpen",
-    }
+      env = {
+        -- env required to run test container in Colima
+        -- ref: https://node.testcontainers.org/supported-container-runtimes/#colima
+        TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE = "/var/run/docker.sock",
+        DOCKER_HOST = "unix://" .. home_directory .. "/.colima/default/docker.sock",
+      },
+    },
   }
 end
