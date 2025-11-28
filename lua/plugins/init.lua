@@ -363,4 +363,19 @@ return {
       },
     },
   },
+  {
+    "kawre/leetcode.nvim",
+    opts = {
+      -- configuration goes here
+      lang = "typescript",
+      picker = { provider = nil },
+      plugins = {
+        non_standalone = true,
+      },
+      storage = {
+        home = "/Users/jeff.tong@konghq.com/Coding/personal/leetcode",
+        cache = "/Users/jeff.tong@konghq.com/Coding/personal/leetcode",
+      },
+    },
+  },
 }
