@@ -17,7 +17,6 @@ require("lazy").setup({
       import = "lazyvim.plugins",
       opts = { colorscheme = "nightfly" },
     },
-    { "nvim-treesitter/nvim-treesitter", lazy = false, branch = "master", build = ":TSUpdate" },
     { import = "lazyvim.plugins.extras.editor.mini-files" },
     { import = "lazyvim.plugins.extras.dap.core" },
     { import = "plugins" },
@@ -25,6 +24,7 @@ require("lazy").setup({
     { import = "plugins.startup_dashboard" },
     { import = "plugins.swagger_preview" },
     { import = "plugins.toggle_term" },
+    { "nvim-treesitter/nvim-treesitter", lazy = false, branch = "master", build = ":TSUpdate" },
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.

@@ -11,9 +11,9 @@ vim.keymap.set("n", "<C-h>", "<Plug>(cokeline-focus-prev)")
 vim.keymap.set("n", "<C-c>", ":bdelete<cr>")
 
 -- NOTE:remove the default lazygit binding
--- vim.keymap.del("n", "<leader>gg")
--- vim.keymap.del("n", "<leader>gG")
--- NOTE:remove the default lazy binding
+vim.keymap.del("n", "<leader>gg")
+vim.keymap.del("n", "<leader>gG")
+-- -- NOTE:remove the default lazy binding
 vim.keymap.del("n", "<leader>l")
 
 -- which-keys

@@ -2,7 +2,7 @@ local Terminal = require("toggleterm.terminal").Terminal
 
 function Lazygit_toggle()
   local lazygit = Terminal:new({
-    cmd = "/opt/homebrew/Cellar/lazygit/0.40.2/bin/lazygit",
+    cmd = "/opt/homebrew/bin/lazygit",
 
     dir = "git_dir",
     direction = "float",
