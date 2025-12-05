@@ -287,15 +287,13 @@ return {
         executable = {
           command = "node",
           args = {
-            require("mason-registry").get_package("js-debug-adapter"):get_install_path()
-              .. "/js-debug/src/dapDebugServer.js",
+            vim.fn.expand("$MASON/bin/js-debug-adapter") .. "/js-debug/src/dapDebugServer.js",
             "${port}",
           },
         },
       }
 
-      local mason_registry = require("mason-registry")
-      local codelldb_root = mason_registry.get_package("codelldb"):get_install_path() .. "/extension/"
+      local codelldb_root = vim.fn.expand("$MASON/bin/js-debug-adapter") .. "/extension/"
       local codelldb_path = codelldb_root .. "adapter/codelldb"
       local liblldb_path = codelldb_root .. "lldb/lib/liblldb.so"
 
@@ -353,16 +351,16 @@ return {
     end,
     ft = { "markdown" },
   },
-  {
-    "simrat39/rust-tools.nvim",
-    opts = {
-      tools = {
-        hover_actions = {
-          auto_focus = true,
-        },
-      },
-    },
-  },
+  -- {
+  --   "simrat39/rust-tools.nvim",
+  --   opts = {
+  --     tools = {
+  --       hover_actions = {
+  --         auto_focus = true,
+  --       },
+  --     },
+  --   },
+  -- },
   {
     "kawre/leetcode.nvim",
     opts = {

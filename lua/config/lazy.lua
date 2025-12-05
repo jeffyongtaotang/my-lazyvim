@@ -8,7 +8,7 @@ end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 -- config augment code work space
-vim.g.augment_workspace_folders = { "~/Coding/" }
+vim.g.augment_workspace_folders = { "~/coding/" }
 
 require("lazy").setup({
   spec = {
