@@ -351,29 +351,19 @@ return {
     end,
     ft = { "markdown" },
   },
-  -- {
-  --   "simrat39/rust-tools.nvim",
-  --   opts = {
-  --     tools = {
-  --       hover_actions = {
-  --         auto_focus = true,
-  --       },
-  --     },
-  --   },
-  -- },
   {
-    "kawre/leetcode.nvim",
+    "github/copilot.vim",
+  },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    branch = "canary",
+    dependencies = {
+      { "github/copilot.vim" },
+      { "nvim-lua/plenary.nvim" },
+    },
     opts = {
-      -- configuration goes here
-      lang = "typescript",
-      picker = { provider = nil },
-      plugins = {
-        non_standalone = true,
-      },
-      storage = {
-        home = "/Users/jeff.tong@konghq.com/Coding/personal/leetcode",
-        cache = "/Users/jeff.tong@konghq.com/Coding/personal/leetcode",
-      },
+      debug = false,
+      model = "gpt-4.1",
     },
   },
 }
