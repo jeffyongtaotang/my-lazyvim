@@ -6,6 +6,7 @@ require("lspconfig")["yamlls"].setup({
     if
       string.match(current_buf_path, ".*/templates/.*.yaml") ~= nil
       or string.match(current_buf_path, ".*/templates/.*.tpl") ~= nil
+      or string.match(current_buf_path, "/Users/jeff.tong@konghq.com/Coding/platform-api/.*") ~= nil
     then
       vim.diagnostic.disable()
     end
