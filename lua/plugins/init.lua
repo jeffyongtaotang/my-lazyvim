@@ -285,9 +285,8 @@ return {
         host = "localhost",
         port = "${port}",
         executable = {
-          command = "node",
+          command = "js-debug-adapter",
           args = {
-            vim.fn.expand("$MASON/bin/js-debug-adapter") .. "/js-debug/src/dapDebugServer.js",
             "${port}",
           },
         },
